@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/breakfast"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:text="@string/breakfast"
+    tools:context=".Breakfast.BreakfastActivity"
+    tools:showIn="@layout/breakfast_content_main"
+    >
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Select Item"
+        />
+
+    <EditText
+        android:id="@+id/edit_date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Date"/>
+
+     <Button
+
+         android:id="@+id/btnSave"
+         android:text="Save"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="290dp"
+         android:layout_marginLeft="290dp"
+         android:layout_marginTop="20dp"
+
+         />
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp">
+
+
+    <include layout="@layout/breakfast_content_main"/>
+
+</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom">
+
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/fab_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                app:fab_colorNormal="#DA4336"
+                app:fab_colorPressed="#E75043"
+                app:fab_colorRipple="#99FFFFFF"
+                app:fab_showShadow="true"
+                app:menu_labels_colorNormal="#333333"
+                app:menu_labels_colorPressed="#444444"
+                app:menu_labels_colorRipple="#66FFFFFF"
+                app:menu_labels_showShadow="true"
+                app:menu_labels_maxLines="-1"
+                app:menu_labels_position="left"
+                app:menu_openDirection="up"
+                app:fab_shadowColor="#66000000"
+                app:menu_labels_ellipsize="end"
+                app:menu_labels_singleLine="true"
+
+
+                >
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fabview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:fab_label="View saved data"
+                    />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fabadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_add"
+                    app:fab_label="Add item to menu"
+
+                    />
+
+
+
+            </com.github.clans.fab.FloatingActionMenu>
+
+
+
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

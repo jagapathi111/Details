@@ -14,15 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BreakfastActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BreakfastList"
-            android:parentActivityName=".BreakfastActivity" />
+        <activity android:name=".Breakfast.BreakfastActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Breakfast"
+            />
+
+        <activity android:name=".Lunch.LunchActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Lunch"
+            />
+
+        <activity android:name=".Dinner.DinnerActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Dinner"
+            />
 
     </application>
 

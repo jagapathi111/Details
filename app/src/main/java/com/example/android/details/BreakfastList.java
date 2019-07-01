@@ -1,42 +1,20 @@
 package com.example.android.details;
 
-import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.AbstractWindowedCursor;
 import android.database.Cursor;
-import android.database.CursorWindow;
-import android.database.sqlite.SQLiteBlobTooBigException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.example.android.details.Breakfast.Breakfast;
+import com.example.android.details.Breakfast.BreakfastActivity;
+import com.example.android.details.Breakfast.BreakfastListAdapter;
+
 import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class BreakfastList extends AppCompatActivity {
@@ -51,7 +29,7 @@ public class BreakfastList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_breakfast);
+        setContentView(R.layout.breakfast_view);
 
 
 

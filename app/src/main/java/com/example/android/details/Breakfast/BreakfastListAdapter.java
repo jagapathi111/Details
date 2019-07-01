@@ -1,21 +1,16 @@
-package com.example.android.details;
+package com.example.android.details.Breakfast;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.provider.Settings;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.android.details.R;
 
 import java.util.ArrayList;
 
@@ -25,8 +20,6 @@ public class BreakfastListAdapter extends BaseAdapter {
     private Context context;
     private  int layout;
     public ArrayList<Breakfast> foodsList;
-
-
 
 
     public BreakfastListAdapter(Context context, int layout, ArrayList<Breakfast> foodsList) {
@@ -76,7 +69,6 @@ public class BreakfastListAdapter extends BaseAdapter {
         else {
             holder = (ViewHolder) row.getTag();
         }
-
 
 
         final Breakfast food = foodsList.get(position);

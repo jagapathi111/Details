@@ -55,6 +55,82 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+
+    public void insertData1(String name, byte[] image){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO FOOD1 VALUES (NULL, ?, ?)";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, name);
+        statement.bindBlob(2, image);
+
+        statement.executeInsert();
+    }
+
+    public void insertLunch(String name, String  date) {
+
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO LUNCH VALUES (NULL, ?, ?)";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, name);
+        statement.bindString(2,date );
+
+        statement.executeInsert();
+
+    }
+
+    public Cursor getLunch() {
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor b = database.rawQuery("select * from  LUNCH", null);
+        return b;
+
+
+    }
+
+
+    public void insertData2(String name, byte[] image){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO FOOD2 VALUES (NULL, ?, ?)";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, name);
+        statement.bindBlob(2, image);
+
+        statement.executeInsert();
+    }
+
+    public void insertDinner(String name, String  date) {
+
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "INSERT INTO DINNER VALUES (NULL, ?, ?)";
+
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+
+        statement.bindString(1, name);
+        statement.bindString(2,date );
+
+        statement.executeInsert();
+
+    }
+
+    public Cursor getDinner() {
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor b = database.rawQuery("select * from  DINNER", null);
+        return b;
+
+
+    }
+
+
+
     public Cursor getData(String sql){
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);

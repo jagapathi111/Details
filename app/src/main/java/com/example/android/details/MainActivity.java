@@ -1,52 +1,71 @@
 package com.example.android.details;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
-import static android.media.browse.MediaBrowser.EXTRA_PAGE;
-import static android.os.Build.VERSION_CODES.N;
+import com.example.android.details.Breakfast.BreakfastActivity;
+import com.example.android.details.Dinner.DinnerActivity;
+import com.example.android.details.Lunch.LunchActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    CardView cardview1, cardview2, cardview3;
+     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("Breakfast","we are in oncreate haha clicklistener");
 
+        cardview1 = findViewById(R.id.cardview1);
+        cardview2 = findViewById(R.id.cardview2);
+        cardview3 = findViewById(R.id.cardview3);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new CustomPagerAdapter(this));
+        cardview1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, BreakfastActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        cardview2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, LunchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        cardview3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, DinnerActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
 
-    public enum CustomPagerEnum {
-
-        Breakfast(R.string.breakfast, R.layout.view_breakfast),
-        Lunch(R.string.lunch, R.layout.view_lunch),
-        Dinner(R.string.Dinner, R.layout.view_dinner);
-
-        private int mTitleResId;
-        private int mLayoutResId;
-
-        CustomPagerEnum(int titleResId, int layoutResId) {
-            mTitleResId = titleResId;
-            mLayoutResId = layoutResId;
-        }
-
-        public int getTitleResId() {
-            return mTitleResId;
-        }
-
-        public int getLayoutResId() {
-            return mLayoutResId;
-        }
-
-    }
 
 }
 

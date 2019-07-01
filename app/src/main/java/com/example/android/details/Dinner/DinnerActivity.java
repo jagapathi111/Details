@@ -1,4 +1,4 @@
-package com.example.android.details;
+package com.example.android.details.Dinner;
 
 
 import android.Manifest;
@@ -9,14 +9,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,10 +35,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.example.android.details.Dinner.Dinner;
+import com.example.android.details.Dinner.DinnerListAdapter;
+import com.example.android.details.Dinner.DinnerActivity;
+import com.example.android.details.R;
+import com.example.android.details.SQLiteHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
-public class BreakfastActivity extends AppCompatActivity  {
+public class DinnerActivity extends AppCompatActivity  {
 
     EditText edtName,edtdate;
     Button btnChoose, btnAdd, btnSave, btnView, btnList, btnClick;
@@ -48,11 +51,11 @@ public class BreakfastActivity extends AppCompatActivity  {
     //FloatingActionButton fab;
     Dialog d;
     DatePickerDialog picker;
-   public String selecteditem;
+    public String selecteditem;
 
     GridView gridView;  //
-    ArrayList<Breakfast> list;  //
-    BreakfastListAdapter adapter = null;  //
+    ArrayList<Dinner> list;  //
+    DinnerListAdapter adapter = null;  //
 
     final int REQUEST_CODE_GALLERY = 999;
     private static final int CAMERA_REQUEST = 1888;
@@ -66,16 +69,16 @@ public class BreakfastActivity extends AppCompatActivity  {
     protected void onCreate(@Nullable Bundle savedInstancestate) {
 
         super.onCreate(savedInstancestate);
-        setContentView(R.layout.view_breakfast);
+        setContentView(R.layout.breakfast_view);
         edtdate =  findViewById(R.id.edit_date);
         btnSave =  findViewById(R.id.btnSave);
         btnView =  findViewById(R.id.btnView);
-       // btnClick = findViewById(R.id.btnClick);
+        // btnClick = findViewById(R.id.btnClick);
         edtName =  findViewById(R.id.edtName);
         edtdate = findViewById(R.id.edit_date);
         btnChoose =  findViewById(R.id.btnChoose);
         btnAdd =  findViewById(R.id.btnAdd);
-       //btnList =   findViewById(R.id.btnList);
+        //btnList =   findViewById(R.id.btnList);
         imageView =  findViewById(R.id.imageView);
 
         // For viewing menu of Items
@@ -113,11 +116,11 @@ public class BreakfastActivity extends AppCompatActivity  {
 
                 else {
 
-               sqLiteHelper.insertBreakfast(selecteditem, edtdate.getText().toString());
+                    sqLiteHelper.insertDinner(selecteditem, edtdate.getText().toString());
 
-               Toast.makeText(BreakfastActivity.this, "Saved successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(com.example.android.details.Dinner.DinnerActivity.this, "Saved successfully!", Toast.LENGTH_SHORT).show();
 
-               edtdate.setText("");
+                    edtdate.setText("");
 
                 }
 
@@ -129,13 +132,13 @@ public class BreakfastActivity extends AppCompatActivity  {
 
         sqLiteHelper = new SQLiteHelper(this,"Fooddata.sqlite", null, 2);
 
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS FOOD(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, image shortBLOB)");
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS FOOD2(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, image shortBLOB)");
 
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS BREAKFAST(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, date VARCHAR)");
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS DINNER(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, date VARCHAR)");
 
 
         final   FloatingActionMenu fam;
-         final   FloatingActionButton fabView, fabAdd;
+        final   FloatingActionButton fabView, fabAdd;
 
         fabAdd =  findViewById(R.id.fabadd);
         fabView =  findViewById(R.id.fabview);
@@ -183,7 +186,7 @@ public class BreakfastActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 fam.close(true);
 
-                Cursor b = sqLiteHelper.getBreakfast();
+                Cursor b = sqLiteHelper.getDinner();
 
                 if (b.getCount() == 0) {
                     // show message
@@ -198,7 +201,7 @@ public class BreakfastActivity extends AppCompatActivity  {
                     buffer.append("Date :" + b.getString(2) + "\n\n");
                 }
 
-                showMessage("Breakfast", buffer.toString());
+                showMessage("dinner", buffer.toString());
 
             }
         });
@@ -228,12 +231,12 @@ public class BreakfastActivity extends AppCompatActivity  {
 
     private void displayInputdialog ( final int pos) {
         d = new Dialog(this);
-        d.setContentView(R.layout.input_dialog);
+        d.setContentView(R.layout.breakfast_input_dialog);
 
         edtName = (EditText) d.findViewById(R.id.edtName);
         btnAdd = (Button) d.findViewById(R.id.btnAdd);
         btnChoose = (Button) d.findViewById(R.id.btnChoose);
-       // btnClick = d.findViewById(R.id.btnClick);
+        // btnClick = d.findViewById(R.id.btnClick);
         imageView = (ImageView) d.findViewById(R.id.imageView);
 
 
@@ -242,7 +245,7 @@ public class BreakfastActivity extends AppCompatActivity  {
             public void onClick(View view) {
 
                 CharSequence[] items = {"Choose from Gallery", "click photo"};
-                AlertDialog.Builder dialog = new AlertDialog.Builder(BreakfastActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(com.example.android.details.Dinner.DinnerActivity.this);
 
                 //dialog.setTitle("Choose an action");
                 dialog.setItems(items, new DialogInterface.OnClickListener() {
@@ -251,14 +254,14 @@ public class BreakfastActivity extends AppCompatActivity  {
                         if (item == 0) {
 
                             ActivityCompat.requestPermissions
-                                    (BreakfastActivity.this,
+                                    (com.example.android.details.Dinner.DinnerActivity.this,
                                             new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
                                             REQUEST_CODE_GALLERY
                                     );
 
                         } else {
 
-                            ActivityCompat.requestPermissions(BreakfastActivity.this,
+                            ActivityCompat.requestPermissions(com.example.android.details.Dinner.DinnerActivity.this,
                                     new String[]  {Manifest.permission.CAMERA},
                                     MY_CAMERA_PERMMISSION_CODE);
 
@@ -292,7 +295,7 @@ public class BreakfastActivity extends AppCompatActivity  {
 
                     try {
 
-                        sqLiteHelper.insertData(
+                        sqLiteHelper.insertData2(
                                 sedtname,
                                 imageViewToByte(imageView));
 
@@ -307,8 +310,8 @@ public class BreakfastActivity extends AppCompatActivity  {
                         e.printStackTrace();
                     }
 
-                      //Intent intent = new Intent(BreakfastActivity.this, BreakfastList.class);
-                     //startActivity(intent);
+                    //Intent intent = new Intent(BreakfastActivity.this, BreakfastList.class);
+                    //startActivity(intent);
 
                     list();
 
@@ -324,14 +327,14 @@ public class BreakfastActivity extends AppCompatActivity  {
     public void list() {
 
 
-       gridView = findViewById(R.id.gridView);
+        gridView = findViewById(R.id.gridView);
         list = new ArrayList<>();
-        adapter = new BreakfastListAdapter(this, R.layout.breakfast_items,list);
+        adapter = new DinnerListAdapter(this, R.layout.dinner_items,list);
         gridView.setAdapter(adapter);
 
         // get all data from sqlite
 
-        final Cursor cursor = BreakfastActivity.sqLiteHelper.getData("SELECT * FROM FOOD");
+        final Cursor cursor = com.example.android.details.Dinner.DinnerActivity.sqLiteHelper.getData("SELECT * FROM FOOD2");
         list.clear();
 
         while (cursor.moveToNext()) {
@@ -340,15 +343,15 @@ public class BreakfastActivity extends AppCompatActivity  {
             String name = cursor.getString(1);
             byte[] image = cursor.getBlob(2);
 
-            list.add(new Breakfast(name, image, id));
+            list.add(new Dinner(name, image, id));
 
 
         }
 
         // Intent intent = new Intent(BreakfastActivity.this, BreakfastList.class);
-       // startActivity(intent);
+        // startActivity(intent);
 
-adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
 
         // On grid Item click
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -360,12 +363,12 @@ adapter.notifyDataSetChanged();
 
                 view.setBackgroundColor(Color.parseColor("#EEEEEE"));
 
-                final Cursor cursor1= BreakfastActivity.sqLiteHelper.getData("SELECT * FROM FOOD");
+                final Cursor cursor1= com.example.android.details.Dinner.DinnerActivity.sqLiteHelper.getData("SELECT * FROM FOOD2");
 
                 while (cursor1.moveToPosition(position)) {
 
                     // int ids = cursor1.getInt(0);
-                     selecteditem = cursor1.getString(1);
+                    selecteditem = cursor1.getString(1);
                     //byte[] image = cursor1.getBlob(2);
 
                     System.out.println(selecteditem);
@@ -380,18 +383,18 @@ adapter.notifyDataSetChanged();
     public void date() {
 
         final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                picker = new DatePickerDialog(this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                edtdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                picker.show();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        // date picker dialog
+        picker = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        edtdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
+                }, year, month, day);
+        picker.show();
 
     }
 
@@ -407,7 +410,7 @@ adapter.notifyDataSetChanged();
     @Override
     public void onRequestPermissionsResult  (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-           //for selecting photo from gallery
+        //for selecting photo from gallery
 
         if(requestCode == REQUEST_CODE_GALLERY){
             if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
@@ -422,7 +425,7 @@ adapter.notifyDataSetChanged();
             }
             return;
         }
-                // for clicking photo
+        // for clicking photo
 
         else if (requestCode == MY_CAMERA_PERMMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {

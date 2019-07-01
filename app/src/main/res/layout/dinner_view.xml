@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/breakfast"
+    android:id="@+id/dinner"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:text="@string/breakfast"
-    tools:context=".BreakfastActivity"
-    tools:showIn="@layout/content_main">
+    android:text="@string/Dinner"
+    tools:context=".Dinner.DinnerActivity"
+    tools:showIn="@layout/dinner_content_main"
+    >
 
     <Button
         android:id="@+id/btnView"
@@ -33,29 +34,29 @@
         android:inputType="textPersonName"
         android:hint="Date"/>
 
-     <Button
+    <Button
 
-         android:id="@+id/btnSave"
-         android:text="Save"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="290dp"
-         android:layout_marginLeft="290dp"
-         android:layout_marginTop="20dp"
+        android:id="@+id/btnSave"
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="290dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="20dp"
 
-         />
-
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="100dp">
+        />
 
 
-    <include layout="@layout/content_main"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+
+        <include layout="@layout/dinner_content_main"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"

@@ -1,5 +1,4 @@
-package com.example.android.details;
-
+package com.example.android.details.Breakfast;
 
 
 public class Breakfast {
@@ -37,3 +36,7 @@ public class Breakfast {
         this.image = image;
     }
 }
+
+
+
+
